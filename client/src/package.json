@@ -1,0 +1,14 @@
+{
+  "name": "ToDo",
+  "version": "0.0.0",
+  "description": "ToDo Application",
+  "author": "Carmine Moleti",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.8.4"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.2"
+  }
+}

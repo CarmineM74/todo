@@ -1,0 +1,14 @@
+defaults: &defaults
+  client:
+    origin: http://localhost
+  session_duration: <%= 1.minutes %>
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+    
