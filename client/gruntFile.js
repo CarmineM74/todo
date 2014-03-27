@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         },
         src: ['<%= src.tpl.app %>'],
         dest: '.tmp/templates/app.coffee',
-        module: 'templates.coffee'
+        module: 'templates.app'
       },
       common: {
         options: {
