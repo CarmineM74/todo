@@ -1,0 +1,17 @@
+{
+  "name": "todo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/CarmineM74/todo",
+  "authors": [
+    "Carmine Moleti <carmine@moleti.it>"
+  ],
+  "description": "ToDo Application",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.2.15",
+    "jquery": "~2.1.0",
+    "angular-ui-router": "~0.2.10",
+    "angular-bootstrap": "~0.10.0",
+    "bootstrap-sass": "~3.0.2"
+  }
+}
