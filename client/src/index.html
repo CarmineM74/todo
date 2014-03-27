@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang='en' ng-app='app'>
+<html lang='en'>
   <head>
     <title><%= pkg.description %></title>
     <!-- build:css styles/todo.css -->
     <link rel='stylesheet' type='text/css' href='styles/<%= pkg.name %>.css'>
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-app='app'>
     <div class='container'>
       <h1><span class='glyphicon glyphicon-download'>Hello world!</span></h1>
     </div>
 
-      <!-- build:js /scripts/angular.js -->
+      <!-- build:js scripts/angular.js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <!-- endbuild -->
 
-      <!-- build:js /scripts/bootstrap.js -->
+      <!-- build:js scripts/bootstrap.js -->
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <!-- endbuild -->
+
+      <!-- build:js scripts/modules.js -->
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <!-- endbuild -->>
+
+      <script src="scripts/todo.js"></script>
 
   </body>
 </html>

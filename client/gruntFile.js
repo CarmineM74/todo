@@ -15,7 +15,19 @@ module.exports = function(grunt) {
 
   // Default tasks
   grunt.registerTask('default',['build','karma:unit']);
-  grunt.registerTask('build',['clean','html2js','concat:index','useminPrepare','coffee','compass:dist','copy:styles','copy:fonts','copy:dist','cssmin','usemin']);
+  grunt.registerTask('build',[
+      'clean',
+      'html2js',
+      'useminPrepare',
+      'coffee',
+      'compass:dist',
+      'concat',
+      'copy:styles',
+      'copy:fonts',
+      'copy:dist',
+      'cssmin',
+      'usemin'
+  ]);
 
   // Print a timestamp while watching
   grunt.registerTask('timestamp',function(){
@@ -79,7 +91,7 @@ module.exports = function(grunt) {
           sourceMap: true
         },
         src: ['src/app/**/*.coffee', '.tmp/templates/**/*.coffee'],
-        dest: '.tmp/<%= pkg.name %>.js'
+        dest: '.tmp/concat/scripts/<%= pkg.name %>.js'
       }
     },
     compass: {
@@ -100,7 +112,9 @@ module.exports = function(grunt) {
     },
     copy: {
       dist: {
-        files: [{expand: true, cwd: '.tmp', src: '*.js', dest: '<%= distdir %>' }]
+        files: [
+          {expand: true, cwd: '.tmp/concat/scripts', src: '*.js', dest: '<%= distdir %>/scripts' }
+        ]
       },
       styles: {
         expand: true,
