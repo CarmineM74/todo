@@ -18,5 +18,6 @@
 
 /client/.tmp
 /client/dist
-
+/client/node_modules
+/client/src/bower_components
 

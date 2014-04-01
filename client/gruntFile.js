@@ -49,6 +49,32 @@ module.exports = function(grunt) {
       coffeeTpl: ['<%= distdir %>/templates/**/*.coffee']
     },
     clean: ['<%= distdir %>', '.tmp'],
+    watch: {
+      karma: {
+        files: ['src/app/**/*.coffee','test/**/*.coffee'],
+        tasks: ['default']
+      }
+    },
+    karma: {
+      unit: {
+          configFile: 'test/karma-unit.conf.js'
+          basePath: '.',
+          frameworks: ['jasmine'],
+          preprocessors: { '**/*.coffee': 'coffee' },
+          singleRun: false,
+          autoWatch: false,
+          reporters: ['progress'],
+          browsers: ['Firefox'],
+          files: [
+            'src/bower_components/angular/angular.js',
+            'src/bower_components/angular-mocks/angular-mocks.js',
+            'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'src/bower_components/angular-ui-router/release/angular-ui-router.js',
+            'src/app/**/*.coffee',
+            'test/**/*.coffee'
+          ]
+      }
+    },
     html2js: {
       app: {
         options: {
