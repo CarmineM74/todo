@@ -5,6 +5,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -14,7 +15,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rev');
 
   // Default tasks
-  grunt.registerTask('default',['build','karma:unit']);
+  grunt.registerTask('default',['serve']);
+  grunt.registerTask('serve',['build','karma:unit:run'])
   grunt.registerTask('build',[
       'clean',
       'html2js',
@@ -49,30 +51,26 @@ module.exports = function(grunt) {
       coffeeTpl: ['<%= distdir %>/templates/**/*.coffee']
     },
     clean: ['<%= distdir %>', '.tmp'],
+    connect: {
+      server: {
+        options: {
+          hostname: '0.0.0.0'
+          ,port: 9876
+          ,base: 'dist'
+          ,keepalive: false
+        }
+      }
+    },
     watch: {
       karma: {
-        files: ['src/app/**/*.coffee','test/**/*.coffee'],
-        tasks: ['default']
+        files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/**/*.coffee'],
+        tasks: ['karma:unit:run']
       }
     },
     karma: {
       unit: {
           configFile: 'test/karma-unit.conf.js'
-          basePath: '.',
-          frameworks: ['jasmine'],
-          preprocessors: { '**/*.coffee': 'coffee' },
-          singleRun: false,
-          autoWatch: false,
-          reporters: ['progress'],
-          browsers: ['Firefox'],
-          files: [
-            'src/bower_components/angular/angular.js',
-            'src/bower_components/angular-mocks/angular-mocks.js',
-            'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-            'src/bower_components/angular-ui-router/release/angular-ui-router.js',
-            'src/app/**/*.coffee',
-            'test/**/*.coffee'
-          ]
+          ,background: true
       }
     },
     html2js: {

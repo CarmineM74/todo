@@ -1,13 +1,13 @@
 app = angular.module('app',[
   'ui.router'
-  'templates.app'
-  'templates.common'
+  ,'templates.app'
+  ,'templates.common'
 ])
 
 app.constant('APP_CONFIG', {
   server: '127.0.0.1'
-  port: '3000'
-  version: '0.0.0'
+  ,port: '3000'
+  ,version: '0.0.0'
 })
 
 app.config(($stateProvider, $urlRouterProvider) ->
@@ -15,7 +15,7 @@ app.config(($stateProvider, $urlRouterProvider) ->
 
   $stateProvider
     .state('home', {
-      url: '/home'
+      ,url: '/home'
       templateUrl: 'home.tpl.html'
     })
 )

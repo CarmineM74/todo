@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['scenario'],
 
 
     // list of files / patterns to load in the browser
@@ -20,7 +20,7 @@ module.exports = function(config) {
       'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'src/bower_components/angular-ui-router/release/angular-ui-router.js',
       'src/app/**/*.coffee',
-      'test/**/*.coffee'
+      'test/e2e/**/*.coffee'
     ],
 
 
@@ -60,8 +60,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Firefox'],
-
+    browsers: ['Chrome'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
