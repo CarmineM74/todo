@@ -1,9 +1,5 @@
 describe('States', ->
-  #[$rootScope, $state, $injector, $httpBackend] = ''
-  $rootScope = ''
-  $state = ''
-  $injector = ''
-  $httpBackend = ''
+  [$rootScope, $state, $injector, $httpBackend] = ['','','','']
 
   beforeEach(-> module('app'))
   beforeEach(-> module('templates'))
@@ -17,8 +13,9 @@ describe('States', ->
   )
 
   describe('State: visitor', ->
+    beforeEach(-> $state.go('visitor'))
     it('$state should be visitor', ->
-      expect($state.is('visitor')).toBe(true)
+      expect($state.current.name).toBe('visitor')
     )
   )
 )
