@@ -11,12 +11,12 @@ app.constant('APP_CONFIG', {
 })
 
 app.config(($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise("/home")
+  $urlRouterProvider.otherwise("/visitor")
 
   $stateProvider
-    .state('home', {
-      ,url: '/home'
-      templateUrl: 'home.tpl.html'
+    .state('visitor', {
+      ,url: '/visitor'
+      templateUrl: 'visitor.tpl.html'
     })
 )
 

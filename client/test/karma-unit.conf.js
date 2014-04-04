@@ -19,7 +19,8 @@ module.exports = function(config) {
       'src/bower_components/angular-mocks/angular-mocks.js',
       'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'src/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'src/app/**/*.coffee',
+      //'src/app/**/*.coffee',
+      'dist/scripts/todo.js',
       'src/app/**/*.tpl.html',
       'test/unit/**/*.coffee'
     ],

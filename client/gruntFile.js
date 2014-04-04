@@ -2,7 +2,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -15,8 +14,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rev');
 
   // Default tasks
-  grunt.registerTask('default',['serve']);
-  grunt.registerTask('serve',['build','karma:unit:run'])
+  grunt.registerTask('default',['build']);
+  grunt.registerTask('serve',['karma:unit','build','karma:unit:run','connect','watch'])
   grunt.registerTask('build',[
       'clean',
       'html2js',
@@ -54,23 +53,51 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          hostname: '0.0.0.0'
-          ,port: 9876
+          hostname: 'localhost'
           ,base: 'dist'
+          ,port: 9001
           ,keepalive: false
         }
       }
     },
     watch: {
+      options: {
+        livereload: true
+      },
       karma: {
         files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/**/*.coffee'],
-        tasks: ['karma:unit:run']
+        tasks: ['default']
       }
     },
     karma: {
       unit: {
-          configFile: 'test/karma-unit.conf.js'
-          ,background: true
+          //configFile: 'test/karma-unit.conf.js'
+          background: true
+          ,options: {
+            files: [
+              'src/bower_components/angular/angular.js',
+              'src/bower_components/angular-mocks/angular-mocks.js',
+              'src/bower_components/angular-ui-router/release/angular-ui-router.js',
+              'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+              //'src/app/**/*.coffee',
+              'dist/scripts/todo.js',
+              'test/unit/**/*.coffee'
+            ]
+
+            ,frameworks: ['jasmine']
+
+            ,preprocessors: { 
+              '**/*.coffee': 'coffee'
+            }
+
+            ,coffeePreprocessor: {
+              bare: true
+              ,sourceMap: true
+            }
+
+            ,browsers: []
+            ,port: 8887
+          }
       }
     },
     html2js: {
