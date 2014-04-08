@@ -2,6 +2,7 @@ app = angular.module('app',[
   'ui.router'
   ,'templates.app'
   ,'templates.common'
+  ,'home'
 ])
 
 app.constant('APP_CONFIG', {
@@ -11,12 +12,13 @@ app.constant('APP_CONFIG', {
 })
 
 app.config(($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise("/visitor")
+  $urlRouterProvider.otherwise("/")
 
   $stateProvider
-    .state('visitor', {
-      ,url: '/visitor'
-      templateUrl: 'visitor.tpl.html'
+    .state('home', {
+      url: '/'
+      templateUrl: 'home.tpl.html'
+      controller: 'HomeController'
     })
 )
 

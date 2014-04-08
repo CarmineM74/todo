@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 
   // Default tasks
   grunt.registerTask('default',['build']);
-  grunt.registerTask('serve',['karma:unit','build','karma:unit:run','connect','watch'])
+  grunt.registerTask('serve',['karma:unit','karma:e2e','build','karma:unit:run','karma:e2e:run','connect','watch'])
   grunt.registerTask('build',[
       'clean',
       'html2js',
@@ -64,14 +64,17 @@ module.exports = function(grunt) {
       options: {
         livereload: true
       },
-      karma: {
-        files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/**/*.coffee'],
-        tasks: ['default']
+      unit: {
+        files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/unit/*.coffee'],
+        tasks: ['build','karma:unit:run']
+      },
+      e2e: {
+        files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/e2e/*.coffee'],
+        tasks: ['build','karma:e2e:run']
       }
     },
     karma: {
       unit: {
-          //configFile: 'test/karma-unit.conf.js'
           background: true
           ,options: {
             files: [
@@ -79,7 +82,6 @@ module.exports = function(grunt) {
               'src/bower_components/angular-mocks/angular-mocks.js',
               'src/bower_components/angular-ui-router/release/angular-ui-router.js',
               'src/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-              //'src/app/**/*.coffee',
               'dist/scripts/todo.js',
               'test/unit/**/*.coffee'
             ]
@@ -95,8 +97,34 @@ module.exports = function(grunt) {
               ,sourceMap: true
             }
 
-            ,browsers: []
+            ,browsers: ['PhantomJS']
             ,port: 8887
+          }
+      },
+      e2e: {
+          autoWatch: false
+          ,singleRun: false
+          ,options: {
+            files: [
+              'test/e2e/**/*.coffee'
+            ]
+
+            ,frameworks: ['ng-scenario']
+
+            ,preprocessors: { 
+              '**/*.coffee': 'coffee'
+            }
+
+            ,coffeePreprocessor: {
+              bare: true
+              ,sourceMap: true
+            }
+            ,browsers: ['PhantomJS']
+            ,captureTimeout: 60000
+            ,urlRoot: '/_e2e/'
+            ,proxies: {
+              '/' : 'http://localhost:9001/'
+            }
           }
       }
     },
