@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 
   // Default tasks
   grunt.registerTask('default',['build']);
-  grunt.registerTask('serve',['karma:unit','karma:e2e','build','karma:unit:run','karma:e2e:run','connect','watch'])
+  grunt.registerTask('serve',['karma:unit','build','karma:unit:run','connect','watch'])
   grunt.registerTask('build',[
       'clean',
       'html2js',
@@ -67,10 +67,6 @@ module.exports = function(grunt) {
       unit: {
         files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/unit/*.coffee'],
         tasks: ['build','karma:unit:run']
-      },
-      e2e: {
-        files: ['src/app/**/*.coffee','src/common/**/*.coffee','test/e2e/*.coffee'],
-        tasks: ['build','karma:e2e:run']
       }
     },
     karma: {
@@ -99,32 +95,6 @@ module.exports = function(grunt) {
 
             ,browsers: ['PhantomJS']
             ,port: 8887
-          }
-      },
-      e2e: {
-          autoWatch: false
-          ,singleRun: false
-          ,options: {
-            files: [
-              'test/e2e/**/*.coffee'
-            ]
-
-            ,frameworks: ['ng-scenario']
-
-            ,preprocessors: { 
-              '**/*.coffee': 'coffee'
-            }
-
-            ,coffeePreprocessor: {
-              bare: true
-              ,sourceMap: true
-            }
-            ,browsers: ['PhantomJS']
-            ,captureTimeout: 60000
-            ,urlRoot: '/_e2e/'
-            ,proxies: {
-              '/' : 'http://localhost:9001/'
-            }
           }
       }
     },
