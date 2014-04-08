@@ -71,7 +71,7 @@ module.exports = function(grunt) {
     },
     karma: {
       unit: {
-          background: true
+          background: false
           ,options: {
             files: [
               'src/bower_components/angular/angular.js',
