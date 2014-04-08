@@ -14,7 +14,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rev');
 
   // Default tasks
-  grunt.registerTask('default',['build']);
+  grunt.registerTask('default',['build','copy:publish']);
   grunt.registerTask('serve',['karma:unit','build','karma:unit:run','connect','watch'])
   grunt.registerTask('build',[
       'clean',
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
       },
       coffeeTpl: ['<%= distdir %>/templates/**/*.coffee']
     },
-    clean: ['<%= distdir %>', '.tmp'],
+    clean: ['<%= distdir %>', '.tmp','../public'],
     connect: {
       server: {
         options: {
@@ -160,6 +160,9 @@ module.exports = function(grunt) {
       dist: {}
     },
     copy: {
+      publish: {
+        files: [{expand: true, cwd: './dist', src: '**/*', dest: '../public'}]
+      },
       dist: {
         files: [
           {expand: true, cwd: '.tmp/concat/scripts', src: '*.js', dest: '<%= distdir %>/scripts' }
